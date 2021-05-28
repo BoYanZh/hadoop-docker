@@ -10,12 +10,27 @@ services:
       - "${NN_PORT}:${NN_PORT}"
       - "${NN_HTTP_PORT}:${NN_HTTP_PORT}"
 
-  datanode:
+  datanode1:
     image: crs4/datanode:${HADOOP_VERSION}
     ports:
       - "${DN_PORT}:${DN_PORT}"
       - "${DN_HTTP_PORT}:${DN_HTTP_PORT}"
       - "${DN_IPC_PORT}:${DN_IPC_PORT}"
+    environment:
+      - NAMENODE_HOSTNAME=namenode
+
+  datanode2:
+    image: crs4/datanode:${HADOOP_VERSION}
+    environment:
+      - NAMENODE_HOSTNAME=namenode
+
+  datanode3:
+    image: crs4/datanode:${HADOOP_VERSION}
+    environment:
+      - NAMENODE_HOSTNAME=namenode
+
+  datanode4:
+    image: crs4/datanode:${HADOOP_VERSION}
     environment:
       - NAMENODE_HOSTNAME=namenode
 
@@ -26,10 +41,26 @@ services:
     environment:
       - NAMENODE_HOSTNAME=namenode
 
-  nodemanager:
+  nodemanager1:
     image: crs4/nodemanager:${HADOOP_VERSION}
-    ports:
-      - "${NM_PORT}:${NM_PORT}"
+    environment:
+      - NAMENODE_HOSTNAME=namenode
+      - RESOURCEMANAGER_HOSTNAME=resourcemanager
+
+  nodemanager2:
+    image: crs4/nodemanager:${HADOOP_VERSION}
+    environment:
+      - NAMENODE_HOSTNAME=namenode
+      - RESOURCEMANAGER_HOSTNAME=resourcemanager
+
+  nodemanager3:
+    image: crs4/nodemanager:${HADOOP_VERSION}
+    environment:
+      - NAMENODE_HOSTNAME=namenode
+      - RESOURCEMANAGER_HOSTNAME=resourcemanager
+
+  nodemanager4:
+    image: crs4/nodemanager:${HADOOP_VERSION}
     environment:
       - NAMENODE_HOSTNAME=namenode
       - RESOURCEMANAGER_HOSTNAME=resourcemanager

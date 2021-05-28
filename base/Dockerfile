@@ -19,6 +19,7 @@ COPY entrypoint.sh /
 RUN apt-get -y update && apt-get -y install --no-install-recommends \
       openjdk-${java_version}-jre-headless \
       wget \
+      python3 \
     && apt-get clean && rm -rf /var/lib/apt-lists/* /tmp/* /var/tmp/* \
     && echo "export LD_LIBRARY_PATH=\"${hadoop_home}/lib/native:\${LD_LIBRARY_PATH}\"" >>/etc/profile.d/hadoop.sh \
     && echo "export PATH=\"${hadoop_home}/bin:${hadoop_home}/sbin:\${PATH}\"" >>/etc/profile.d/hadoop.sh \
